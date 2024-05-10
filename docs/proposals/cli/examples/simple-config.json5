@@ -1,0 +1,163 @@
+// =====
+// This is a *possible* configuration file for Rodeo.
+// It is intended to describe how a simple configuration
+// file may look. This would be a good starting point for
+// a new user to understand how to configure Rodeo.
+// =====
+
+{
+  // System configuration is used to define the
+  // basic configuration of the system. This includes
+  // the hostname and domain name of the system.
+  system: {
+    hostname: "rodeo",
+    domain: "home.lan",
+  },
+  // Interfaces are used to define the physical
+  // interfaces on the system. This includes the
+  // name of the interface and any additional
+  // configuration that is needed.
+  interfaces: {
+    ethernet: {
+      wan: {
+        interface: "eth0",
+      },
+      lan: {
+        interface: "eth1",
+        mtu: 9000,
+      },
+    },
+  },
+  // IP configuration of interface names
+  ip: {
+    // The WAN interface is configured to use DHCP
+    wan: {
+      address: "dhcp",
+    },
+    // The LAN interface uses a static IP
+    lan: {
+      address: "192.168.1.1",
+      netmask: "255.255.255.0",
+    },
+  },
+  // DNS configuration for the system.
+  dns: {
+    // A list of global DNS servers that can be used
+    google: {
+      servers: ["8.8.8.8", "8.8.4.4"],
+    },
+    // The LAN DNS server is used to resolve
+    // hostnames on the local network.
+    lan: {
+      servers: ["192.168.1.1"],
+      search-domain: "home.lan"
+    },
+  },
+  // NTP configuration for the system.
+  ntp: {
+    // A list of global NTP servers that can be used
+    global: {
+      servers: ["time.google.com"],
+    },
+  },
+  // Static mappings are used to assign static IPs
+  // to devices on the network. This is useful for
+  // devices that need to be accessed by a fixed IP.
+  static-mappings: {
+    lan-devices: {
+      printer: "00:11:22:33:44:55=192.168.1.5"
+    }
+  },
+  // DHCP configuration for the LAN interface.
+  dhcp: {
+    lan: {
+      default-gateway: "192.168.1.1",
+      ip-ranges: [
+        "192.168.1.50-192.168.1.250"
+      ],
+      dns: [
+        "global","lan"
+      ],
+      ntp: [
+        "global"
+      ],
+      domain-name: "home.lan",
+      register-hostnames: true,
+      static-mappings: [
+        "lan-devices"
+      ],
+    }
+  },
+  // Aliases are used to define groups of
+  // Resources that can be used in rules
+  // or other various places in the configuration.
+  aliases: {
+    lan: {
+      description: "Home LAN Interface",
+      cidrs: ["192.168.1.0/24"]
+    },
+    internet: {
+      description: "All IPs on the Internet",
+      cidrs: ["0.0.0.0/0"]
+    }
+  },
+  // Security groups are used to define rules
+  // that can be applied to interfaces. These
+  // rules can be used to allow or deny traffic
+  // based on the source and destination of the
+  // traffic.
+  security-groups: {
+    wan: {
+      description: "WAN Security Group",
+      // Rules are defined by a number and then
+      // a set of parameters that define the rule.
+      // Rules are processed in order from lowest
+      // to highest number. If traffic does not
+      // match any rule, it is denied by default.
+      rules: {
+        10: {
+          action: "allow",
+          description: "Allow ICMP/Ping traffic",
+          protocol: "ICMP",
+          source: "internet",
+          destination: "ethernet wan"
+        },
+      }
+    },
+    lan: {
+      description: "LAN Security Group",
+      rules: {
+        10: {
+          action: "allow",
+          description: "Allow all traffic from LAN",
+          protocol: "all",
+          source: "ip lan",
+          destination: "ip lan"
+        },
+        20: {
+          action: "allow",
+          description: "Allow all outgoing traffic",
+          protocol: "all",
+          nat: true,
+          source: "ip lan",
+          destination: "internet"
+        }
+      }
+    }
+  },
+  // Bind Interfaces to their associated configurations
+  join: {
+    interfaces: {
+      lan: {
+        dhcp: ["lan"],
+        security-groups: ["lan"],
+        ip: ["lan"],
+        dns: ["lan","google"],
+        ntp: ["global"]
+      },
+      wan: {
+        security-groups: ["wan"],
+      }
+    }
+  }
+}
