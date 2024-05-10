@@ -1,0 +1,21 @@
+# Security Groups
+/security-group/{name}: string
+/security-group/{name}/description: string
+/security-group/{name}/enabled: boolean
+/security-group/{name}/rule: integer
+/security-group/{name}/rule/{rule-number}/action: string
+/security-group/{name}/rule/{rule-number}/protocol: string
+/security-group/{name}/rule/{rule-number}/source: string
+/security-group/{name}/rule/{rule-number}/source-invert: boolean
+/security-group/{name}/rule/{rule-number}/destination: string
+/security-group/{name}/rule/{rule-number}/destination-invert: string
+/security-group/{name}/rule/{rule-number}/source-port: string
+/security-group/{name}/rule/{rule-number}/destination-port: string
+/security-group/{name}/rule/{rule-number}/icmp-type: string
+/security-group/{name}/rule/{rule-number}/icmp-code: string
+/security-group/{name}/rule/{rule-number}/nat/masquerade: boolean
+/security-group/{name}/rule/{rule-number}/nat/gateway-name: boolean
+
+# Aliases
+security-group:
+- sg

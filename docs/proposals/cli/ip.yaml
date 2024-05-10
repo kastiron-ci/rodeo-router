@@ -1,0 +1,10 @@
+# IP Configuration
+/ip/{name}: string
+/ip/{name}/enabled: boolean
+/ip/{name}/address: string
+/ip/{name}/netmask: string
+/ip/{name}/gateway: string
+/ip/{name}/dns: list[string]
+/ip/{name}/dhcp: boolean
+/ip/{name}/dhcp/lease-time: integer
+

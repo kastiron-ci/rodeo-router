@@ -1,0 +1,14 @@
+openapi: 3.0.0
+
+info:
+  title: Rodeo - DHCP
+  description: DHCP API Schema for Rodeo Router
+  version: 0.0.1a
+
+servers:
+- url: https://api.routerd.rodeo.local/v1/dhcp/
+  description: routerd daemon L7 API endpoint
+- url: unix:///var/run/routerd.sock
+  description: routerd daemon Unix Socket
+
+paths: {}

@@ -1,0 +1,45 @@
+# Interface Configuration - Required
+/interface/ethernet/{name}: string # Required
+/interface/ethernet/{name}/interface: string # Required
+/interface/ethernet/{name}/enabled: boolean # default: True
+/interface/ethernet/{name}/protect: boolean # default: True
+/interface/ethernet/{name}/description: string # default: ""
+
+# Optional Properties - Speed, Duplex, and Negotiation
+/interface/ethernet/{name}/mac-address: string # must be a valid MAC address in the format xx:xx:xx:xx:xx:xx
+/interface/ethernet/{name}/mtu: integer # default: 1500
+/interface/ethernet/{name}/mss: integer # default: 1460
+/interface/ethernet/{name}/duplex: string # default: "auto" # options: "auto", "full", "half"
+/interface/ethernet/{name}/speed: string # default: "auto" # options: "auto", "10", "100", "1000", "2500", "5000", "10000", "25000", "40000", "50000", "100000"
+/interface/ethernet/{name}/auto-negotiation: boolean # default: True
+
+# Optional Properties - IP Configuration
+/interface/ethernet/{name}/block-bogon-networks: boolean # default: False
+/interface/ethernet/{name}/block-private-networks: boolean # default: False
+
+# Optional Properties - Rate Limiting
+/interface/ethernet/{name}/flow-control: boolean # default: False
+/interface/ethernet/{name}/rate-limit/{rx|tx}: integer {bytes} # Required if flow-control is True
+/interface/ethernet/{name}/rate-limit/burst-enable: boolean # default: False
+/interface/ethernet/{name}/rate-limit/burst/{rx|tx}: integer {bytes} # Required if burst-enable is True
+/interface/ethernet/{name}/rate-limit/burst-size/{rx|tx}: integer {bytes} # Required if burst-enable is True
+/interface/ethernet/{name}/rate-limit/burst-time/{rx|tx}: integer {seconds} # Required if burst-enable is True
+/interface/ethernet/{name}/rate-limit/burst-size-time/{rx|tx}: integer {seconds}} # Required if burst-enable is True
+
+# Optional Properties - QoS
+/interface/ethernet/{name}/qos/enable: integer # default: False
+/interface/ethernet/{name}/qos/queue: integer # Required if qos is True
+/interface/ethernet/{name}/qos/priority: integer # Required if qos is True
+
+# Optional properties - VLANs
+/interface/ethernet/{name}/vlan: boolean # default: False
+/interface/ethernet/{name}/vlan-id: integer # Required if vlan is True
+
+# Aliases for longer commands
+alises:
+  interface:
+  - int
+  - i
+  ethernet:
+  - eth
+  - e
