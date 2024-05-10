@@ -1,0 +1,14 @@
+# Groups of Network IPs/CIDRs
+/alias/network/{name}: string
+/alias/network/{name}/description: string
+/alias/network/{name}/cidr: list[string] # CIDR format (i.e. 192.168.1.0/24)
+
+# Groups of Interfaces
+/alias/interface/{name}: string
+/alias/interface/{name}/description: string
+/alias/interface/{name}/interface: string # List of interfaces to include in the alias
+
+# Groups of Security Groups
+/alias/ports/{name}: string
+/alias/ports/{name}/description: string
+/alias/ports/{name}/ports: list[string] # List of ports to include in the alias

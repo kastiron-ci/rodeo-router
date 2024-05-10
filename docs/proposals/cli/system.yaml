@@ -1,0 +1,8 @@
+# System Configuration
+/system/hostname: string
+/system/timezone: string
+
+# Aliases
+aliases:
+  system:
+  - sys

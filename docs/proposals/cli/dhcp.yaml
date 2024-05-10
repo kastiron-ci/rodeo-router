@@ -4,10 +4,14 @@
 /dhcp/{name}/ip-ranges: list[string] # IP ranges - format is "start-end" (i.e 192.168.1.50-192.169.1.250)
 /dhcp/{name}/lease-time: integer # default: 86400
 /dhcp/{name}/domain-name: string
+/dhcp/{name}/register-hostnames: boolean # default: True
 /dhcp/{name}/domain-name-servers: list[string]
 /dhcp/{name}/dns-servers: list[string]
 /dhcp/{name}/ntp-servers: list[string]
 /dhcp/{name}/tftp-servers: list[string]
 /dhcp/{name}/boot-file: string
 /dhcp/{name}/boot-server: string
-/dhcp/{name}/static-mappings: list[string] # MAC address to IP address mappings ; format is "mac=ip" (i.e. 00:11:22:33:44:55=192.168.1.10)
+
+# Static Mappings
+/static-mappings/{name}: string
+/static-mappings/{name}/{item-name}: string # MAC address to IP address mappings ; format is "mac=ip" (i.e. 00:11:22:33:44:55=192.168.1.10)

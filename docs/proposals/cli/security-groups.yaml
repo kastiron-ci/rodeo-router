@@ -3,13 +3,14 @@
 /security-group/{name}/description: string
 /security-group/{name}/enabled: boolean
 /security-group/{name}/rule: integer
+# Rule Numbers are processed in order from 1 to n
 /security-group/{name}/rule/{rule-number}/action: string
-/security-group/{name}/rule/{rule-number}/protocol: string
-/security-group/{name}/rule/{rule-number}/source: string
-/security-group/{name}/rule/{rule-number}/source-invert: boolean
-/security-group/{name}/rule/{rule-number}/destination: string
-/security-group/{name}/rule/{rule-number}/destination-invert: string
-/security-group/{name}/rule/{rule-number}/source-port: string
+/security-group/{name}/rule/{rule-number}/protocol: string # default: "all" # options: "all", "tcp", "udp", "icmp"
+/security-group/{name}/rule/{rule-number}/source: string # options: "any", an alias of network resources, a CIDR block, or a single IP address
+/security-group/{name}/rule/{rule-number}/source-invert: boolean # default: False
+/security-group/{name}/rule/{rule-number}/destination: string # options: "any", an alias of network resources, a CIDR block, or a single IP address
+/security-group/{name}/rule/{rule-number}/destination-invert: string # default: False
+/security-group/{name}/rule/{rule-number}/source-port: string # default: "any" # options: "any", a single port, a range of ports, a comma-separated list of ports, or a port alias
 /security-group/{name}/rule/{rule-number}/destination-port: string
 /security-group/{name}/rule/{rule-number}/icmp-type: string
 /security-group/{name}/rule/{rule-number}/icmp-code: string

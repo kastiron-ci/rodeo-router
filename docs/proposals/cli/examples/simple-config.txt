@@ -1,0 +1,96 @@
+# =====
+# This is a *possible* configuration file for Rodeo.
+# It is intended to describe how a simple configuration
+# file may look. This would be a good starting point for
+# a new user to understand how to configure Rodeo.
+# =====
+
+# Create the WAN interface
+interface ethernet wan
+  interface eth0
+
+# Create the LAN interface
+interface ethernet lan
+  interface eth1
+  mtu 9000
+
+# Set the WAN interface to get an IP address via DHCP
+ip wan
+  address dhcp
+
+# Set the LAN interface IP address and subnet
+ip lan
+  address 192.168.1.1
+  netmask 255.255.255.0
+
+# Create the DNS settings for external DNS servers
+dns google
+  servers 8.8.8.8 8.8.4.4
+
+# Create the DNS settings for the LAN
+dns lan
+  servers 192.168.1.1
+  search-domain home.lan
+
+# Create the NTP settings for the LAN
+ntp global
+  servers time.google.com
+
+# Create a static mapping for a device on the LAN
+static-mapping lan-devices
+  printer 00:11:22:33:44:55=192.168.1.5
+
+# Create the DHCP pool for the LAN
+dhcp lan
+  default-gateway 192.168.1.1
+  ip-ranges 192.168.1.50-192.168.1.250
+  dns global lan # Use both DNS targets created earlier
+  ntp lan # Use the NTP settings created earlier
+  domain-name home.lan
+  register-hostnames true
+  static-mappings lan-devices
+
+# Create a LAN Network Alias
+alias lan
+  description "Home LAN"
+  cidr 192.168.1.0/24
+
+# Create an Internet Network Alias
+alias internet
+  description "All IPs on the Internet"
+  cidr 0.0.0.0/0
+
+# Create the firewall rules for the WAN
+security-group wan
+  rule 10
+    action accept
+    description "Allow ICMP traffic"
+    protocol icmp
+    source 0.0.0.0/0
+  rule 100
+    action block
+    description "Block all incoming traffic"
+    protocol all
+    source 0.0.0.0/0
+
+# Create the firewall rules for the LAN
+security-group lan
+  rule 10
+    action accept
+    description "Allow all outgoing traffic"
+    protocol all
+    nat enable
+    source alias lan
+    destination internet
+
+# Join the WAN interface to the appropriate configurations
+join interface wan
+    security-group wan
+
+# Join the LAN interface to the appropriate configurations
+join interface lan
+    security-groups lan
+    dhcp lan
+    ip lan
+    dns lan
+    ntp lan

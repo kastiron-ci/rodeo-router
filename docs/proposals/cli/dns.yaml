@@ -2,4 +2,7 @@
 /dns/{name}: string
 /dns/{name}/servers: list[string]
 /dns/{name}/forwarders: list[string]
-/dns/{name}/zone/{zone-name}: list[string]
+/dns/{name}/search-domains: list[string]
+/dns/{name}/enable-dnssec: boolean
+/dns/{name}/enable-dnssec-validation: boolean
+
