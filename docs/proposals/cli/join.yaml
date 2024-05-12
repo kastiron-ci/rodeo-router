@@ -1,0 +1,11 @@
+# Join Interfaces, Security Groups, and IP Configuration
+/join/{name}: string
+/join/{name}/interfaces/{interface-name}: list[string]
+/join/{name}/ip/{ip-name}: list[string]
+/join/{name}/dhcp/{ip-name}: list[string]
+/join/{name}/security-groups/{security-group-name}: list[string]
+
+# Aliases
+aliases:
+  join:
+  - j

@@ -56,12 +56,12 @@ dhcp lan
   static-mappings lan-devices
 
 # Create a LAN Network Alias
-alias lan
+alias network lan
   description "Home LAN"
   cidrs 192.168.1.0/24
 
 # Create an Internet Network Alias
-alias internet
+alias network internet
   description "All IPs on the Internet"
   cidrs 0.0.0.0/0
 
@@ -81,14 +81,14 @@ security-group lan
     action accept
     description "Allow all traffic from LAN"
     protocol all
-    source ip lan
+    source ip.cidr lan
     destination ip lan
   rule 20
     action allow
     description "Allow all outgoing traffic"
     protocol all
     nat true
-    source ip lan
+    source ip.cidr lan
     destination internet
 
 # Join the WAN interface to the appropriate configurations

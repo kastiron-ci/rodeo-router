@@ -1,0 +1,22 @@
+# Bridge Interface Configuration - Required
+/interface/bridge/{name}: string # Required
+/interface/bridge/{name}/description: string # default: ""
+/interface/bridge/{name}/interface: list[string] # Required
+/interface/bridge/{name}/enabled: boolean # default: True
+/interface/bridge/{name}/protect: boolean # default: True
+/interface/bridge/{name}/stp: boolean # default: False
+
+# Optional Properties
+/interface/bridge/{name}/stp-protocol: string # default: "rstp" (stp|rstp|mstp)
+/interface/bridge/{name}/stp-priority: integer # default: 32768
+/interface/bridge/{name}/stp-forward-delay: integer # default: 15
+/interface/bridge/{name}/stp-hello-time: integer # default: 2
+/interface/bridge/{name}/stp-max-age: integer # default: 20
+
+# Aliases for longer commands
+aliases:
+  interface:
+  - int
+  - i
+  bridge:
+  - br

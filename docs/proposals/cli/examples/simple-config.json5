@@ -92,13 +92,15 @@
   // Resources that can be used in rules
   // or other various places in the configuration.
   aliases: {
-    lan: {
-      description: "Home LAN Interface",
-      cidrs: ["192.168.1.0/24"]
-    },
-    internet: {
-      description: "All IPs on the Internet",
-      cidrs: ["0.0.0.0/0"]
+    network: {
+      lan: {
+        description: "Home LAN Interface",
+        cidrs: ["192.168.1.0/24"]
+      },
+      internet: {
+        description: "All IPs on the Internet",
+        cidrs: ["0.0.0.0/0"]
+      }
     }
   },
   // Security groups are used to define rules

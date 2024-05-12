@@ -1,4 +1,4 @@
-# Interface Configuration - Required
+# Ethernet Interface Configuration - Required
 /interface/ethernet/{name}: string # Required
 /interface/ethernet/{name}/interface: string # Required
 /interface/ethernet/{name}/enabled: boolean # default: True

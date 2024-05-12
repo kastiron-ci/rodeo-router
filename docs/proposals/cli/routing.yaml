@@ -1,0 +1,11 @@
+# Route Configuration
+/route/{name}: string
+/route/{name}/description: string
+/route/{name}/destination: string
+/route/{name}/gateway: string
+
+# Optional Properties
+/route/{name}/interface: string
+/route/{name}/metric: integer
+/route/{name}/static: boolean
+/route/{name}/blackhole: boolean
